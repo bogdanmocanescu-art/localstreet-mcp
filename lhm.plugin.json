@@ -1,0 +1,224 @@
+{
+  "author": "bogdanmocanescu-art",
+  "authorUrl": "https://github.com/bogdanmocanescu-art",
+  "cloudEndpoint": "https://localstreet.co.uk/mcp",
+  "description": "Local London information for AI assistants: businesses, what's on, schools, noticeboard and live travel, from Localstreet.",
+  "homepage": "https://localstreet.co.uk",
+  "identifier": "bogdanmocanescu-art-localstreet-mcp",
+  "name": "Localstreet",
+  "prompts": [],
+  "resources": [],
+  "tools": [
+    {
+      "name": "search_businesses",
+      "title": "Search businesses",
+      "description": "Search the businesses listed on Localstreet by trade or name.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "q": {
+            "type": "string",
+            "description": "trade or name"
+          },
+          "district": {
+            "type": "string",
+            "description": "postcode district"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10,
+            "description": "how many (default 5)"
+          },
+          "area": {
+            "type": "string",
+            "description": "where: a London borough (e.g. ealing, brent, hounslow) or a postcode district (e.g. W7, UB1)"
+          }
+        },
+        "required": [
+          "q"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "business_details",
+      "title": "Business details",
+      "description": "One listed business: trade, address, phone, opening hours, open now, whether it takes callback requests.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "its Localstreet path, e.g. w7/some-name"
+          },
+          "area": {
+            "type": "string",
+            "description": "where: a London borough (e.g. ealing, brent, hounslow) or a postcode district (e.g. W7, UB1)"
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "events_on",
+      "title": "Events on",
+      "description": "What's on in the visitor's borough on a day (today, tomorrow, weekend, week, or yyyy-mm-dd).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "when": {
+            "type": "string",
+            "description": "today | tomorrow | weekend | week | yyyy-mm-dd"
+          },
+          "q": {
+            "type": "string",
+            "description": "words to match in the title or venue"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10,
+            "description": "how many (default 5)"
+          },
+          "area": {
+            "type": "string",
+            "description": "where: a London borough (e.g. ealing, brent, hounslow) or a postcode district (e.g. W7, UB1)"
+          }
+        },
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "schools_near",
+      "title": "Schools near",
+      "description": "Schools in the visitor's area from our hub data (Ofsted, phase, faith character, address), nearest first.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "district": {
+            "type": "string",
+            "description": "postcode district, e.g. W5"
+          },
+          "phase": {
+            "type": "string",
+            "description": "primary, secondary, nursery, sixth form…"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10,
+            "description": "how many (default 5)"
+          },
+          "area": {
+            "type": "string",
+            "description": "where: a London borough (e.g. ealing, brent, hounslow) or a postcode district (e.g. W7, UB1)"
+          }
+        },
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "catchment_check",
+      "title": "Catchment check",
+      "description": "Whether a postcode was inside a school's last admissions distance. Says when that data is not available yet.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "school": {
+            "type": "string",
+            "description": "school name"
+          },
+          "postcode": {
+            "type": "string",
+            "description": "the visitor's postcode"
+          },
+          "area": {
+            "type": "string",
+            "description": "where: a London borough (e.g. ealing, brent, hounslow) or a postcode district (e.g. W7, UB1)"
+          }
+        },
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "noticeboard_search",
+      "title": "Noticeboard search",
+      "description": "Live posts on the borough's noticeboard (for sale, free, wanted, local help).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "q": {
+            "type": "string",
+            "description": "words to match"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10,
+            "description": "how many (default 5)"
+          },
+          "area": {
+            "type": "string",
+            "description": "where: a London borough (e.g. ealing, brent, hounslow) or a postcode district (e.g. W7, UB1)"
+          }
+        },
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "area_now",
+      "title": "Area now",
+      "description": "What is happening in the area right now: tube and rail status, bus disruption, serious roadworks, flood warnings, air quality and police events, with how fresh each is.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "area": {
+            "type": "string",
+            "description": "where: a London borough (e.g. ealing, brent, hounslow) or a postcode district (e.g. W7, UB1)"
+          }
+        },
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    }
+  ],
+  "version": "1.0.0"
+}

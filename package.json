@@ -1,0 +1,9 @@
+{
+  "name": "localstreet-mcp",
+  "displayName": "Localstreet",
+  "version": "1.0.0",
+  "description": "Local London information for AI assistants: businesses, what's on, schools, noticeboard and live travel, from Localstreet.",
+  "homepage": "https://localstreet.co.uk",
+  "repository": { "type": "git", "url": "https://github.com/bogdanmocanescu-art/localstreet-mcp" },
+  "private": true
+}
